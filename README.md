@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+# shoe-store
+
+A full‑stack e‑commerce web app built with the MERN stack. Features include product browsing, shopping cart, user authentication, and order management. Designed with a responsive UI and scalable backend to demonstrate practical skills in modern web development.
 
 # StepUp — Full-Stack MERN Shoe Store
 
@@ -53,10 +55,88 @@ shoe-store/
         └── pages/       # all pages incl. admin/
 ```
 
-=======
+## Setup Instructions
 
-# shoe-store
+### Prerequisites
 
-A full‑stack e‑commerce web app built with the MERN stack. Features include product browsing, shopping cart, user authentication, and order management. Designed with a responsive UI and scalable backend to demonstrate practical skills in modern web development.
+- Node.js 18+
+- MongoDB running locally, or a free MongoDB Atlas cluster
+- A free Stripe account (test mode) — only needed for card payments; COD works without it
 
-> > > > > > > 9b672b6fd78dd906debe516048c49464f529a761
+### 1. Backend setup
+
+```bash
+cd server
+npm install
+cp .env.example .env
+```
+
+Edit `.env`:
+
+- `MONGO_URI` — your local or Atlas connection string
+- `JWT_SECRET` — any long random string
+- `STRIPE_SECRET_KEY` — from your Stripe dashboard (test mode key starts with `sk_test_`)
+- `STRIPE_WEBHOOK_SECRET` — see the Stripe webhook section below
+
+Seed the database with sample products and demo accounts:
+
+```bash
+npm run seed
+```
+
+Start the server:
+
+```bash
+npm run dev
+```
+
+API runs on `http://localhost:5000`.
+
+### 2. Frontend setup
+
+```bash
+cd client
+npm install
+cp .env.example .env
+```
+
+Edit `.env` and add your Stripe **publishable** key (`pk_test_...`).
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+App runs on `http://localhost:5173` (Vite proxies `/api` calls to the backend automatically — see `vite.config.js`).
+
+### 3. Stripe webhook (for card payments to be marked "paid")
+
+Payment confirmation is handled via webhook, not by trusting the browser — this is the correct real-world pattern.
+
+For local development, use the Stripe CLI:
+
+```bash
+stripe listen --forward-to localhost:5000/api/payments/webhook
+```
+
+This prints a webhook signing secret (`whsec_...`) — put that in your server `.env` as `STRIPE_WEBHOOK_SECRET`.
+
+Test card number for checkout: `4242 4242 4242 4242`, any future expiry, any CVC.
+
+If you skip Stripe setup entirely, **Cash on Delivery still works end-to-end** without any configuration.
+
+## Suggested Next Steps (for going further)
+
+- Add product image upload (Cloudinary/S3) instead of pasting image URLs in the admin form
+- Add email notifications (order confirmation, password reset) via Nodemailer + a transactional email service
+- Add a wishlist feature
+- Add order invoice PDF generation
+- Deploy: backend to Render/Railway, frontend to Vercel/Netlify, database on MongoDB Atlas
+- Add automated tests (Jest + Supertest for API, React Testing Library for frontend)
+
+## Tech Stack
+
+- **Frontend:** React 18, React Router, Tailwind CSS, Axios, Stripe Elements, React Toastify
+- **Backend:** Express, Mongoose, JWT, bcryptjs, Stripe SDK, Helmet, express-rate-limit
+- **Database:** MongoDB
