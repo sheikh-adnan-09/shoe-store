@@ -29,7 +29,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // dev
-      "https://shoe-store-git-main-ad-e2ee.vercel.app", // your Vercel deployment
+      "https://shoe-store-alpha-eight.vercel.app", // your Vercel deployment
+      "https://shoe-store-git-main-ad-e2ee.vercel.app",
     ],
     credentials: true,
   }),
