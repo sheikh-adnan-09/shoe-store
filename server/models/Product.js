@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema(
     rating: { type: Number, required: true, min: 1, max: 5 },
     comment: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const sizeStockSchema = new mongoose.Schema(
@@ -15,7 +15,7 @@ const sizeStockSchema = new mongoose.Schema(
     size: { type: Number, required: true }, // e.g. 6,7,8,9,10,11
     stock: { type: Number, required: true, default: 0 },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const productSchema = new mongoose.Schema(
@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema(
     isFeatured: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 productSchema.index({ name: "text", brand: "text", description: "text" });
@@ -47,5 +47,5 @@ productSchema.methods.totalStock = function () {
   return this.sizes.reduce((sum, s) => sum + s.stock, 0);
 };
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema, "products");
 export default Product;
