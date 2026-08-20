@@ -32,7 +32,9 @@ const Home = () => {
         if (sort) params.set("sort", sort);
         params.set("page", page);
 
-        const { data } = await api.get(`/products?${params.toString()}`);
+        const { data } = await api.get(
+          `${import.meta.env.VITE_API_URL}/products?${params.toString()}`,
+        );
         setProducts(data.products);
         setPages(data.pages);
       } finally {
