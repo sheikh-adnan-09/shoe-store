@@ -27,7 +27,10 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [
+      "http://localhost:5173", // dev
+      "https://shoe-store-git-main-ad-e2ee.vercel.app", // your Vercel deployment
+    ],
     credentials: true,
   }),
 );
