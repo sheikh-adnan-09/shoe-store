@@ -74,6 +74,8 @@ app.use((req, res) => {
     .json({ success: false, message: "Not Found - " + req.originalUrl });
 });
 
+console.log("Product routes mounted at /api/products");
+
 app.use(notFound);
 app.use(errorHandler);
 
