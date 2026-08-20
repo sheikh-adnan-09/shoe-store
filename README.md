@@ -6,6 +6,10 @@ A full‑stack e‑commerce web app built with the MERN stack. Features include 
 
 A complete, real-world e-commerce project built with MongoDB, Express, React, and Node.js.
 
+Deployment : Frontend-Vercel, Backend-Render and Database-MongoDB Atlas.
+
+Live On Vercel : https://shoe-store-alpha-eight.vercel.app/
+
 ## Features
 
 **Customer-facing**
