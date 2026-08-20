@@ -112,19 +112,9 @@ App runs on `http://localhost:5173` (Vite proxies `/api` calls to the backend au
 
 ### 3. Stripe webhook (for card payments to be marked "paid")
 
-Payment confirmation is handled via webhook, not by trusting the browser — this is the correct real-world pattern.
+Online Payment is yet pending to be implemented, like we can use RazorPay for payment...
 
-For local development, use the Stripe CLI:
-
-```bash
-stripe listen --forward-to localhost:5000/api/payments/webhook
-```
-
-This prints a webhook signing secret (`whsec_...`) — put that in your server `.env` as `STRIPE_WEBHOOK_SECRET`.
-
-Test card number for checkout: `4242 4242 4242 4242`, any future expiry, any CVC.
-
-If you skip Stripe setup entirely, **Cash on Delivery still works end-to-end** without any configuration.
+If you skip Online Payment setup entirely, **Cash on Delivery still works end-to-end** without any configuration.
 
 ## Suggested Next Steps (for going further)
 
